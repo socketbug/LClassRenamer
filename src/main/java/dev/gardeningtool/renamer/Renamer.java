@@ -31,7 +31,7 @@ public class Renamer {
                 getFiles(file.listFiles());
             } else {
                 if (file.getName().endsWith(".lclass")) {
-                    this.files.add(file);
+                    files.add(file);
                     System.out.println("Found file " + file.getPath());
                 }
             }
@@ -40,15 +40,14 @@ public class Renamer {
 
     private void rename() {
         List<File> files = new ArrayList<>();
-        this.files.forEach(file -> {
-            if (!file.renameTo(new File(file.getPath().replace(file.getName(), "") + file.getName().replace(".lclass", ".class")))) {
+        files.forEach(file -> {
+            if (!file.renameTo(new File(file.getPath().replace(file.getName(), "") + file.getName().replace(".lclass", ".class"))))
                 files.add(file);
-            } else {
+            else
                 System.out.println("Successfully renamed " + file.getPath());
-            }
         });
         files.forEach(file -> System.out.println("Failed renaming for " + file.getPath()));
-        System.out.println("Successfully renamed " + (this.files.size() - files.size()) + " .lclass files!");
+        System.out.println("Successfully renamed " + (files.size() - files.size()) + " .lclass files!");
         System.out.println("Failed renaming for " + files.size() + " .lclass files");
     }
 
